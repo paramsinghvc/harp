@@ -16,8 +16,18 @@ let devConfig = {
             './src/index.js',
         ],
         vendor: [
+            'babel-polyfill',
             'react',
             'react-dom',
+            'immutable',
+            'isomorphic-fetch',
+            'react-addons-css-transition-group',
+            'redux',
+            'react-redux',
+            'redux-thunk',
+            'react-router',
+            'react-tap-event-plugin',
+            'rxjs'
         ],
     },
 
@@ -44,7 +54,11 @@ let devConfig = {
     module: {
         loaders: [{
             test: /\.s[ac]ss$/,
-            loaders: ['style', 'css', 'sass']
+            loaders: [
+                'style',
+                'css',
+                'sass'
+            ]
         }, {
             test: /\.jsx*$/,
             exclude: [/node_modules/],
@@ -72,8 +86,8 @@ let devConfig = {
         }),
         new HtmlWebpackPlugin({
             inject: true,
-            filename: path.join(__dirname , 'index.html'),
-            template: path.join(__dirname , 'index-tpl.html')
+            filename: path.join(__dirname, 'index.html'),
+            template: path.join(__dirname, 'index-tpl.html')
         }),
     ]
 };
@@ -83,50 +97,57 @@ let prodConfig = {
 
     entry: {
         app: [
-            './client/index.js',
+            './src/index.js',
         ],
         vendor: [
+            'babel-polyfill',
             'react',
             'react-dom',
+            'immutable',
+            'isomorphic-fetch',
+            'react-addons-css-transition-group',
+            'redux',
+            'react-redux',
+            'redux-thunk',
+            'react-router',
+            'react-tap-event-plugin',
+            'rxjs'
         ]
     },
 
     output: {
-        path: __dirname + '/dist/',
+        path: path.join(__dirname, '/build/'),
         filename: '[name].[chunkhash].js',
-        publicPath: '/',
+        publicPath: '/build/',
     },
 
-    resolve: {
-        extensions: ['', '.js', '.jsx'],
-        modules: [
-            'client',
-            'node_modules',
-        ],
-    },
+    // resolve: {
+    //     extensions: ['', '.js', '.jsx'],
+    //     modules: [
+    //         'src',
+    //         'node_modules',
+    //     ],
+    // },
 
     module: {
-        loaders: [
-            // {
-            //     test: /\.css$/,
-            //     exclude: /node_modules/,
-            //     loader: ExtractTextPlugin.extract('style-loader', 'css-loader'),
-            // },
-            {
-                test: /\.s[ac]ss$/,
-                loaders: ['style', 'css', 'sass']
-            }, {
-                test: /\.jsx*$/,
-                exclude: /node_modules/,
-                loader: 'babel',
-            }, {
-                test: /\.(jpe?g|gif|png|svg)$/i,
-                loader: 'url-loader?limit=10000',
-            }, {
-                test: /\.json$/,
-                loader: 'json-loader',
-            },
-        ],
+        loaders: [{
+            test: /\.css$/,
+            exclude: /node_modules/,
+            loader: ExtractTextPlugin.extract('style-loader', 'css-loader'),
+        }, {
+            test: /\.s[ac]ss$/,
+            loaders: ['style', 'css', 'sass']
+        }, {
+            test: /\.jsx*$/,
+            exclude: /node_modules/,
+            loader: 'babel',
+        }, {
+            test: /\.(jpe?g|gif|png|svg)$/i,
+            loader: 'url-loader?limit=10000',
+        }, {
+            test: /\.json$/,
+            loader: 'json-loader',
+        }],
     },
 
     plugins: [
@@ -145,6 +166,11 @@ let prodConfig = {
             compressor: {
                 warnings: false,
             }
+        }),
+        new HtmlWebpackPlugin({
+            inject: true,
+            filename: path.join(__dirname, 'index.html'),
+            template: path.join(__dirname, 'index-tpl.html')
         }),
     ]
 };

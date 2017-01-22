@@ -2,11 +2,12 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { Router, browserHistory } from 'react-router';
 
+// Base stylesheet
+require('./Main.scss');
+
 // Import Routes
 import routes from './routes';
 
-// Base stylesheet
-require('./main.scss');
 
 export default function Main(props) {
     return (
