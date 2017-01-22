@@ -24,7 +24,9 @@ export class App extends Component {
       <div>
         {this.state.isMounted && !window.devToolsExtension && process.env.NODE_ENV === 'development' && <DevTools />}
         <div>                  	
-            <h1>Hola Mundo!</h1>
+            <h1>Hola Mundo! 
+                <span>{this.props.isLoading ? 'Loading...' : ''}</span>
+            </h1>
             <div>
               {this.props.children}
             </div>          
@@ -38,8 +40,9 @@ App.propTypes = {
 };
 
 // Retrieve data from store as props
-function mapStateToProps(store) {
+function mapStateToProps(state) {
   return {
+    isLoading: state.app.get('isLoading')
   };
 }
 

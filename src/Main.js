@@ -12,7 +12,7 @@ import routes from './routes';
 export default function Main(props) {
     return (
     <Provider store={props.store}>
-        <Router history={browserHistory}>
+        <Router history={browserHistory} key={Math.random()}>
         	{routes}
         </Router>    
     </Provider>
