@@ -24,7 +24,7 @@ export class App extends Component {
       <div>
         {this.state.isMounted && !window.devToolsExtension && process.env.NODE_ENV === 'development' && <DevTools />}
         <div>                  	
-            <h1>Hola Mundo!!</h1>
+            <h1>Hola Mundo!</h1>
             <div>
               {this.props.children}
             </div>          

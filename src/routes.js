@@ -9,9 +9,9 @@ if (typeof require.ensure !== 'function') {
     };
 }
 
-const lazyLoadComponent = (path) => (nextState, callback) => {
-    require.ensure([], require => callback(null, require(path).default));
-};
+// const lazyLoadComponent = (path) => (nextState, callback) => {
+//     require.ensure([], require => callback(null, require(path).default));
+// };
 
 /* Workaround for async react routes to work with react-hot-reloader till
   https://github.com/reactjs/react-router/issues/2182 and
@@ -27,7 +27,11 @@ if (process.env.NODE_ENV == 'development') {
 const routes = 
     (<Route path="/" component={App}>
             <IndexRoute
-              getComponent={lazyLoadComponent('./modules/home/Home')}
+              getComponent={(nextState, cb) => {
+                require.ensure([], require => {
+                  cb(null, require('./modules/home/Home').default);
+                });
+              }}
             />
             {/*<Route
               path="/posts/:slug-:cuid"
