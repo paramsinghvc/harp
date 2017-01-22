@@ -1,6 +1,16 @@
 # react-boilerplate
 A boilerplate for React apps with React Hot Loading. 
 
+### Technologies
+- React
+- Redux 
+- ImmutableJS
+- React Hot Loader
+- Webpack
+- React Router (Lazy Loading of Modules)
+- SCSS
+- Redux DevTools
+
 # Steps to run
 
 `npm install`
