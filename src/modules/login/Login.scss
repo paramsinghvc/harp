@@ -1,0 +1,29 @@
+@import '../../styles/base/_variables.scss';
+.login-holder {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    text-align: center;
+    background: $black url('https://unsplash.it/g/400/600?blur') no-repeat center center;
+    background-size: cover;
+    background-attachment: fixed;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    img.logo {
+        width: 128px;
+    }
+    .login-button {
+        background-color: $primary-color;
+        padding: 18px 20px;
+        width: 80%;
+        border-radius: 31px;
+        border: none;
+        font-size: 20px;
+        color: $black;
+        margin-left: auto;
+        margin-right: auto;
+        cursor: pointer;
+    }
+}

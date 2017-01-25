@@ -1,25 +1,25 @@
 {
-    "name": "React Boilerplate",
-    "short_name": "RB",
+    "name": "Harp",
+    "short_name": "Harp",
     "icons": [{
-        "src": "images/touch/icon-128x128.png",
+        "src": "/assets/images/spotify-128.png",
         "sizes": "128x128",
         "type": "image/png"
     }, {
-        "src": "images/touch/apple-touch-icon.png",
+        "src": "/assets/images/spotify-152.png",
         "sizes": "152x152",
         "type": "image/png"
     }, {
-        "src": "images/touch/ms-touch-icon-144x144-precomposed.png",
+        "src": "/assets/images/spotify-144.png",
         "sizes": "144x144",
         "type": "image/png"
     }, {
-        "src": "images/touch/chrome-touch-icon-192x192.png",
+        "src": "/assets/images/spotify-192.png",
         "sizes": "192x192",
         "type": "image/png"
     }],
-    "start_url": "/index.html?homescreen=1",
+    "start_url": "/",
     "display": "standalone",
-    "background_color": "#3E4EB8",
-    "theme_color": "#2F3BA2"
+    "background_color": "#fff",
+    "theme_color": "#00d95f"
 }

@@ -1,49 +1,66 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-// import CSSModules from 'react-css-modules';
+import { bindActionCreators } from 'redux';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import Snackbar from 'material-ui/Snackbar';
 
-// Import Style
+import { setSnackbar } from '../app/AppActions';
+
+const muiTheme = getMuiTheme({
+    palette: {
+        primary1Color: '#00d95f',
+        textColor: '#000',
+    }
+});
+
 const appStyles = require('./App.scss');
 
-// Import Components
 import DevTools from './components/ReduxDevTools';
 
-// @CSSModules(appStyles)
-export class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { isMounted: false };
-  }
+@connect((state) => {
+    return {
+        sbOpen: state.app.getIn(['snackBar', 'open']),
+        sbMsg: state.app.getIn(['snackBar', 'message'])
+    }
+}, (dispatch) => {
+    return bindActionCreators({ setSnackbar }, dispatch)
+})
+class App extends Component {
+    constructor(props) {
+        super(props);
+        this.state = { isMounted: false };
+    }
 
-  componentDidMount() {
-    this.setState({isMounted: true});
-  }  
+    componentDidMount() {
+        this.setState({ isMounted: true });
+    }
 
-  render() {
-    return (
-      <div>
-        {this.state.isMounted && !window.devToolsExtension && process.env.NODE_ENV === 'development' && <DevTools />}
-        <div>                  	
-            <h1>Hola Mundo! 
-                <span>{this.props.isLoading ? 'Loading...' : ''}</span>
-            </h1>
+    render() {
+        return (
             <div>
-              {this.props.children}
-            </div>          
-        </div>
-      </div>
-    );
-  }
+                {this.state.isMounted && !window.devToolsExtension && process.env.NODE_ENV === 'development' && <DevTools />}
+                <MuiThemeProvider muiTheme={muiTheme}>    
+                    <div>                                                  
+                        {this.props.children}               
+                          <Snackbar
+                              open={this.props.sbOpen}
+                              message={this.props.sbMsg}
+                              autoHideDuration={2000}
+                              onRequestClose={() => {
+                                this.props.setSnackbar({
+                                    open: false,
+                                    message: ''
+                                })
+                              }}
+                            />
+                    </div>                              
+                </MuiThemeProvider>
+            </div>
+        );
+    }
 }
 
-App.propTypes = {
-};
+App.propTypes = {};
 
-// Retrieve data from store as props
-function mapStateToProps(state) {
-  return {
-    isLoading: state.app.get('isLoading')
-  };
-}
-
-export default connect(mapStateToProps)(App);
+export default App;
