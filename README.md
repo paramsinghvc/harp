@@ -1,5 +1,5 @@
-# react-boilerplate
-A boilerplate for React apps with React Hot Loading. 
+# Harp
+A React + Redux Progressive web app using Spotify API.
 
 ### Technologies
 - React
