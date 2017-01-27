@@ -1,0 +1,29 @@
+.album {
+    color: #fff;
+    .hero-section {
+        width: 100%;
+        min-height: 315px;
+        background: #2d2d2d url('https://unsplash.it/g/978/300?blur&random') no-repeat center center;
+        background-size: cover;
+        background-attachment: fixed;
+        justify-content: flex-start;
+        display: flex;
+        align-items: flex-start;
+        flex-wrap: wrap;
+        padding: 20px;
+        img {
+            margin-right: 30px;
+            max-height: 300px;
+            max-width: 300px;
+        }
+        .info-section {
+            color: #fff;
+            align-self: flex-start;
+            text-shadow: 0 0 22px rgba(0,0,0,0.3);
+            p {
+                font-size: 50px;
+                font-weight: 300;
+            }
+        }
+    }
+}

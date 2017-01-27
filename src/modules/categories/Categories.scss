@@ -1,0 +1,14 @@
+.categories-holder {
+	padding: 50px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    .cat {
+    	cursor: pointer;
+    	margin-right: 5px;
+    	transition: all 0.2s;
+    	&:hover{
+    		box-shadow: 0 0 12px rgba(0,0,0,0.7);
+    	}
+    }
+}

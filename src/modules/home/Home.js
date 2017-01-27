@@ -4,6 +4,8 @@ import { bindActionCreators } from 'redux';
 
 import { setLoading, toggleAppDrawer } from '../app/AppActions';
 import Header from './components/Header';
+import Footer from './components/Footer';
+import Player from '../player/Player';
 
 require('./Home.scss');
 const mapStateToProps = (state) => {
@@ -27,10 +29,11 @@ class Home extends Component {
         return (
         	<div className="home">
         	 	<Header title={this.props.appName} toggleAppDrawer={this.props.toggleAppDrawer} appDrawerOpen={this.props.appDrawerOpen} />
-        		<p>Home Works!</p>
         		<div>
         			{this.props.children}
         		</div>
+                <Footer appName={this.props.appName} />
+                <Player />
         	</div>
         )
     }

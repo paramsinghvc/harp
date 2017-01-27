@@ -1,0 +1,32 @@
+.cat-playlists {
+    color: #fff;
+    .hero-section {
+        width: 100%;
+        min-height: 315px;
+        background: #2d2d2d url('https://unsplash.it/g/978/300?blur&random') no-repeat center center;
+        background-size: cover;
+        background-attachment: fixed;
+        justify-content: flex-start;
+        display: flex;
+        align-items: flex-start;
+        flex-wrap: wrap;
+        padding: 20px;
+        img {
+            margin-right: 30px;
+        }
+        .info-section {
+            color: #fff;
+            align-self: flex-end;
+            p {
+                font-size: 50px;
+                font-weight: 300;
+            }
+        }
+    }
+    .playlists {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding-top: 20px;     
+    }
+}

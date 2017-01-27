@@ -8,7 +8,7 @@ export default class LoginService {
     static accessToken$ = new BehaviorSubject();
 
     static makeAuthUrl() {
-        return `${config.SPOTIFY_AUTH_API}/authorize?client_id=${config.SPOTIFY_CLIENT_ID}&redirect_uri=${encodeURIComponent(config.SPOTIFY_REDIRECT_URI)}&response_type=token`;
+        return `${config.SPOTIFY_AUTH_API}/authorize?client_id=${config.SPOTIFY_CLIENT_ID}&redirect_uri=${encodeURIComponent(config.SPOTIFY_REDIRECT_URI)}&scope=${encodeURIComponent(config.SPOTIFY_AUTH_SCOPES)}&response_type=token`;
     }
     static initHandlers() {
         LoginService.attachMessageEvent();
@@ -61,5 +61,9 @@ export default class LoginService {
             access_token: token
         }, window.location.origin);
         window.close();
+    }
+
+    static logout(){
+        localStorage.removeItem('SPOTIFY_ACCESS_TOKEN')
     }
 }

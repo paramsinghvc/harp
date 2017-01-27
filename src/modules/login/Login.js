@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import {browserHistory} from 'react-router';
 
 import { setSnackbar } from '../app/AppActions';
 import LoginService from './LoginService';
@@ -24,7 +25,8 @@ class Login extends Component {
                 this.props.setSnackbar({
                     message: 'Login Successful',
                     open: true
-                })
+                });
+                browserHistory.push('/');
             }
         }, err => {
             this.props.setSnackbar({

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, IndexRoute } from 'react-router';
+import { Route, IndexRoute, IndexRedirect } from 'react-router';
 import App from './modules/app/App';
 import LoginService from './modules/login/LoginService';
 
@@ -15,6 +15,11 @@ if (typeof require.ensure !== 'function') {
 
 if (process.env.NODE_ENV == 'development') {
     require('./modules/home/Home');
+    require('./modules/login/Login');
+    require('./modules/categories/Categories');
+    require('./modules/categories/components/CategoryPlaylists');
+    require('./modules/playlist/Playlist');
+    require('./modules/album/Album');
 }
 
 const routes = 
@@ -24,8 +29,28 @@ const routes =
                 require.ensure([], require => {
                   cb(null, require('./modules/home/Home').default);
                 });
-              }}
-            >
+              }}>
+                <IndexRedirect to="categories" />
+                <Route path="categories" getComponent={(nextState, cb) => {
+                    require.ensure([], require => {
+                      cb(null, require('./modules/categories/Categories').default);
+                    });
+                }} />
+                <Route path="categories/:id" getComponent={(nextState, cb) => {
+                    require.ensure([], require => {
+                      cb(null, require('./modules/categories/components/CategoryPlaylists').default);
+                    });
+                }} />
+                <Route path="playlist/:userId/:playlistId" getComponent={(nextState, cb) => {
+                    require.ensure([], require => {
+                      cb(null, require('./modules/playlist/Playlist').default);
+                    });
+                }} />
+                <Route path="album/:albumId" getComponent={(nextState, cb) => {
+                    require.ensure([], require => {
+                      cb(null, require('./modules/album/Album').default);
+                    });
+                }} />
             </Route>
             <Route path="/login" getComponent={(nextState, cb) => {
                 require.ensure([], require => {

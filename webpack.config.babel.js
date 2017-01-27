@@ -6,7 +6,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 let isDev = (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'dev');
 
 let devConfig = {
-    devtool: 'cheap-module-eval-source-map',
+    devtool: 'eval-source-map',
 
     entry: {
         app: [
