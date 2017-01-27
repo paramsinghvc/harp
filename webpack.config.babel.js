@@ -27,7 +27,8 @@ let devConfig = {
             'redux-thunk',
             'react-router',
             'react-tap-event-plugin',
-            'rxjs'
+            'rxjs',
+            'material-ui'
         ],
     },
 
@@ -111,7 +112,8 @@ let prodConfig = {
             'redux-thunk',
             'react-router',
             'react-tap-event-plugin',
-            'rxjs'
+            'rxjs',
+            'material-ui'
         ]
     },
 
@@ -131,15 +133,15 @@ let prodConfig = {
 
     module: {
         loaders: [{
-            test: /\.css$/,
-            exclude: /node_modules/,
-            loader: ExtractTextPlugin.extract('style-loader', 'css-loader'),
-        }, {
             test: /\.s[ac]ss$/,
-            loaders: ['style', 'css', 'sass']
+            loaders: [
+                'style',
+                'css',
+                'sass'
+            ]
         }, {
             test: /\.jsx*$/,
-            exclude: /node_modules/,
+            exclude: [/node_modules/],
             loader: 'babel',
         }, {
             test: /\.(jpe?g|gif|png|svg)$/i,
