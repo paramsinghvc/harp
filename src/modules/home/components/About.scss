@@ -1,0 +1,22 @@
+.about {
+    color: #fff;
+    padding: 30px;
+    h2 {
+        font-weight: 300;
+        margin-bottom: 20px;
+    }
+    .me-section {
+        display: flex;
+        flex-wrap: wrap;
+        img {
+            width: 200px;
+            height: 200px;            
+            margin-right: 20px;
+        }
+        p {
+            font-size: 14px;
+            margin-top: 20px;
+            line-height: 1.4;
+        }
+    }
+}

@@ -18,5 +18,6 @@ export const handleError = (error) => {
             message: msg,
             open: true
         }));
+        dispatch(setLoading(false));
     }
 }

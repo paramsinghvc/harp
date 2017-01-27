@@ -1,0 +1,13 @@
+.new-releases-holder {
+    color: #fff;
+    h2 {
+        font-weight: 300;
+        padding: 20px;
+    }
+    .albums {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding-top: 20px;
+    }
+}

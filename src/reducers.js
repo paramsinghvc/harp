@@ -6,6 +6,7 @@ import CategoriesReducer from './modules/categories/CategoriesReducer';
 import PlaylistReducer from './modules/playlist/PlaylistReducer';
 import PlayerReducer from './modules/player/PlayerReducer';
 import AlbumReducer from './modules/album/AlbumReducer';
+import NewReleasesReducer from './modules/new-releases/NewReleasesReducer';
 
 // Combine all reducers into one root reducer
 export default combineReducers({
@@ -13,5 +14,6 @@ export default combineReducers({
 	categories: CategoriesReducer,
 	playlist: PlaylistReducer,
 	player: PlayerReducer,
-	album: AlbumReducer
+	album: AlbumReducer,
+	newReleases: NewReleasesReducer
 });

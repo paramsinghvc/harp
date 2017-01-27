@@ -21,7 +21,9 @@ class Header extends Component {
 				    	iconElementLeft={<IconButton><NavigationClose /></IconButton>}
 				    	onLeftIconButtonTouchTap={this.props.toggleAppDrawer}
 				  	/>				  	
-				  	<Link to="/" onClick={this.props.toggleAppDrawer}><MenuItem>Home</MenuItem></Link>
+				  	<Link to="/" onClick={this.props.toggleAppDrawer}><MenuItem>Top Categories</MenuItem></Link>
+				  	<Link to="/new-releases" onClick={this.props.toggleAppDrawer}><MenuItem>New Releases</MenuItem></Link>
+				  	<Link to="/featured-playlists" onClick={this.props.toggleAppDrawer}><MenuItem>Featured Playlists</MenuItem></Link>
 		          	<Link to="/about" onClick={this.props.toggleAppDrawer}><MenuItem>About</MenuItem></Link>
 		          	<Link to="/login" onClick={this.props.toggleAppDrawer}><MenuItem>Login</MenuItem></Link>
 		        </Drawer>		        	        	

@@ -13,6 +13,9 @@ const initialState = fromJS({
     },
     playlists: {
         items: []
+    },
+    featuredPlaylists: {
+        items: []
     }
 });
 
@@ -24,6 +27,8 @@ const CategoriesReducer = (state = initialState, action) => {
             return state.setIn(['selectedCategory'], fromJS(action.payload))
         case CategoriesConstants.SET_SELECTED_CATEGORY_PLAYLISTS:
             return state.setIn(['playlists'], fromJS(action.payload))
+        case CategoriesConstants.SET_FEATURED_PLAYLISTS:
+            return state.setIn(['featuredPlaylists'], fromJS(action.payload))
         default:
             return state;
     }

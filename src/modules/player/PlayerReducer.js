@@ -31,6 +31,10 @@ const PlayerReducer = (state = initState, action) => {
             return state.setIn(['currentPosition'], action.payload);
         case PlayerConstants.TOGGLE_PLAY_PAUSE:
             return state.update('isPlaying', isPlaying => !isPlaying);
+        case PlayerConstants.SET_PLAYER_QUEUE:
+            return state.setIn(['queue'], fromJS(action.payload));
+        case PlayerConstants.CLEAR_PLAYER_QUEUE:
+            return state.setIn(['queue'], fromJS([]));
         default:
             return state;
     }

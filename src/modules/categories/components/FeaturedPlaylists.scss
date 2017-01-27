@@ -1,0 +1,13 @@
+.featured-playlists {
+    color: #fff;
+    h2{
+        padding: 20px;
+        font-weight: 300;
+    }
+    .playlists {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding-top: 20px;     
+    }
+}

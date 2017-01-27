@@ -29,6 +29,8 @@ class Categories extends Component {
     render() {
         return (
             <section className="categories-holder">
+                <h2>Top Categories - Genres & Moods </h2>
+                <main className="categories"> 
                 {this.props.categories.map((cat, i) => {
                     let icon = cat.get('icons').first();
                     return (
@@ -37,6 +39,7 @@ class Categories extends Component {
                         </div>
                     )
                 })}
+                </main>
             </section>
         )
     }

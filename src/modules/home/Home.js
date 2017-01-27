@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import CircularProgress from 'material-ui/CircularProgress';
 
 import { setLoading, toggleAppDrawer } from '../app/AppActions';
 import Header from './components/Header';
@@ -28,11 +29,11 @@ class Home extends Component {
     render() {
         return (
         	<div className="home">
-        	 	<Header title={this.props.appName} toggleAppDrawer={this.props.toggleAppDrawer} appDrawerOpen={this.props.appDrawerOpen} />
-        		<div>
-        			{this.props.children}
-        		</div>
-                <Footer appName={this.props.appName} />
+        	 	<Header title={this.props.appName} toggleAppDrawer={this.props.toggleAppDrawer} appDrawerOpen={this.props.appDrawerOpen} />        		        
+                {this.props.children}
+                {(this.props.isLoading === true) && <CircularProgress size={60} thickness={3} style={{position: 'fixed', top: '50%', left: '50%', marginLeft: '-30px', marginTop: '-30px'}} />}
+                <div className="bottom-spacer" />
+                {/*<Footer appName={this.props.appName} />*/}
                 <Player />
         	</div>
         )

@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import bindThis from '../../shared/bindThis';
-import { setVolume, setAudio, playAudio, pauseAudio, togglePlayPause, setAudioDuration, setCurrentPosition } from './PlayerActions';
+import { setVolume, setAudio, playAudio, pauseAudio, togglePlayPause, setAudioDuration, setCurrentPosition, playNextAudio, playPrevAudio, clearPlayerQueue } from './PlayerActions';
 
 require('./Player.scss');
 
@@ -14,7 +14,7 @@ require('./Player.scss');
         player: state.player
     }
 }, (dispatch) => {
-    return bindActionCreators({ setVolume, setAudio, playAudio, pauseAudio, togglePlayPause, setAudioDuration, setCurrentPosition }, dispatch)
+    return bindActionCreators({ setVolume, setAudio, playAudio, pauseAudio, togglePlayPause, setAudioDuration, setCurrentPosition, playNextAudio, playPrevAudio, clearPlayerQueue }, dispatch)
 })
 export default class Player extends Component {
     constructor(props) {
@@ -67,6 +67,7 @@ export default class Player extends Component {
         this.props.pauseAudio();
         this.props.setCurrentPosition(0);
         this.audioElem.currentTime = 0;
+        this.props.playNextAudio();
     }
 
     @bindThis
@@ -101,14 +102,22 @@ export default class Player extends Component {
     playPauseStateCheck(isPlaying) {
         if (this.audioElem) {
             if (isPlaying && this.audioElem.paused) {
-                console.log('play');
                 this.audioElem.play();
             }
             if (!isPlaying && !this.audioElem.paused) {
-                console.log('pause');
                 this.audioElem.pause();
             }
         }
+    }
+
+    @bindThis
+    playNext() {
+        this.props.playNextAudio();
+    }
+
+    @bindThis
+    playPrevious() {
+        this.props.playPrevAudio();
     }
 
     render() {
@@ -121,13 +130,14 @@ export default class Player extends Component {
                     <p className="audio-artists">{this.props.player.getIn(['audioInfo', 'artists'])}</p>
                 </div>
                 <div className="audio-controls">
-                    <audio id="audio-elem" ref="audioElem" src={this.props.player.getIn(['audioInfo', 'url'])} />
+                    <audio id="audio-elem" ref="audioElem" src={this.props.player.getIn(['audioInfo', 'url'])} />                    
                     <section className="seek-controls">
-                        <i className="material-icons prev">&#xE045;</i>
+                        <i className="material-icons prev" onClick={this.playPrevious}>&#xE045;</i>
                         <i className={this.props.player.get('isPlaying') ? `material-icons pause-btn`: `material-icons play-btn`}
                         onClick={this.playPauseAudio}></i>
-                        <i className="material-icons next">&#xE044;</i>
+                        <i className="material-icons next"  onClick={this.playNext}>&#xE044;</i>                        
                     </section>
+                    <i className="material-icons clear-queue" title="Clear Queue" onClick={this.props.clearPlayerQueue}>&#xE0B8;</i>
                     <Slider style={{width: '100%'}} sliderStyle={{marginTop: 5}}
                     max={this.props.player.get('audioDuration')} min={0} value={this.props.player.get('currentPosition')}
                     onChange={this.seekAudioToPosition}

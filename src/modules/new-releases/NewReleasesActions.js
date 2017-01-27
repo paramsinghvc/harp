@@ -1,17 +1,17 @@
 import makeActionCreator from '../../shared/ActionCreator';
-import PlaylistConstants from './PlaylistConstants';
+import NewReleasesConstants from './NewReleasesConstants';
 import ApiBridge from '../../shared/ApiBridge';
 import { handleError, setLoading } from '../app/AppActions';
 
-export const setPlaylistData = makeActionCreator(PlaylistConstants.SET_PLAYLIST_DATA, 'payload');
+export const setData = makeActionCreator(NewReleasesConstants.SET_DATA, 'payload');
 
-export const getPlaylistData = (userId, playlistId) => {
+export const getNewReleasesData = () => {
     return (dispatch) => {
     	dispatch(setLoading(true));
-        ApiBridge.makeGet(`/v1/users/${userId}/playlists/${playlistId}`, [], undefined, true)
+        ApiBridge.makeGet(`/v1/browse/new-releases`, [`country=US`], undefined, true)
             .then(res => {
             	dispatch(setLoading(false));
-                dispatch(setPlaylistData(res));
+                dispatch(setData(res.albums));
             })
             .catch(err => {
                 dispatch(handleError(err));

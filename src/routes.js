@@ -15,11 +15,14 @@ if (typeof require.ensure !== 'function') {
 
 if (process.env.NODE_ENV == 'development') {
     require('./modules/home/Home');
+    require('./modules/home/components/About');
     require('./modules/login/Login');
     require('./modules/categories/Categories');
     require('./modules/categories/components/CategoryPlaylists');
+    require('./modules/categories/components/FeaturedPlaylists');
     require('./modules/playlist/Playlist');
     require('./modules/album/Album');
+    require('./modules/new-releases/NewReleases');
 }
 
 const routes = 
@@ -41,6 +44,11 @@ const routes =
                       cb(null, require('./modules/categories/components/CategoryPlaylists').default);
                     });
                 }} />
+                <Route path="featured-playlists" getComponent={(nextState, cb) => {
+                    require.ensure([], require => {
+                      cb(null, require('./modules/categories/components/FeaturedPlaylists').default);
+                    });
+                }} />
                 <Route path="playlist/:userId/:playlistId" getComponent={(nextState, cb) => {
                     require.ensure([], require => {
                       cb(null, require('./modules/playlist/Playlist').default);
@@ -49,6 +57,16 @@ const routes =
                 <Route path="album/:albumId" getComponent={(nextState, cb) => {
                     require.ensure([], require => {
                       cb(null, require('./modules/album/Album').default);
+                    });
+                }} />
+                <Route path="new-releases" getComponent={(nextState, cb) => {
+                    require.ensure([], require => {
+                      cb(null, require('./modules/new-releases/NewReleases').default);
+                    });
+                }} />
+                <Route path="about" getComponent={(nextState, cb) => {
+                    require.ensure([], require => {
+                      cb(null, require('./modules/home/components/About').default);
                     });
                 }} />
             </Route>
