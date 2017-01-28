@@ -10,6 +10,7 @@ import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 
 import bindThis from '../../../shared/bindThis';
 import LoginService from '../../login/LoginService';
+import SearchBox from './SearchBox';
 
 class Header extends Component {
 
@@ -26,9 +27,10 @@ class Header extends Component {
 
     render() {
         return (
-            <header>
+            <header style={{height: 64}}>
         		<AppBar
 				    title={this.props.title}
+				    style={{position: 'fixed'}}
 				     onLeftIconButtonTouchTap={this.props.toggleAppDrawer}
 				     iconElementRight={(<IconMenu
 						    iconButtonElement={
@@ -40,8 +42,10 @@ class Header extends Component {
 						    <MenuItem primaryText="Refresh" onClick={this.refreshPage} />
 						    <MenuItem primaryText="Sign out" onClick={this.logoutApp} />
 						  </IconMenu>)}
-				 />
-        		<Drawer open={this.props.appDrawerOpen} docked={false} onRequestChange={this.props.toggleAppDrawer}
+				     >
+				     {/*<SearchBox />*/}				     
+				     </AppBar>
+        			<Drawer open={this.props.appDrawerOpen} docked={false} onRequestChange={this.props.toggleAppDrawer}
         			// style={{display: (this.props.appDrawerOpen ? 'block': 'none')}}
         			>
         			<AppBar

@@ -7,6 +7,7 @@ import { setLoading, toggleAppDrawer } from '../app/AppActions';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Player from '../player/Player';
+import Search from '../search/Search';
 
 require('./Home.scss');
 const mapStateToProps = (state) => {
@@ -33,7 +34,8 @@ class Home extends Component {
         	 	<Header title={this.props.appName} toggleAppDrawer={this.props.toggleAppDrawer} appDrawerOpen={this.props.appDrawerOpen} />        		        
                 <div id="main-content">{this.props.children}</div>
                 {(this.props.isLoading === true) && <CircularProgress size={60} thickness={3} style={{position: 'fixed', top: '50%', left: '50%', marginLeft: '-30px', marginTop: '-30px'}} />}
-                <div className="bottom-spacer" />
+                {/*<Search />*/}
+                <div className="bottom-spacer" />                
                 {/*<Footer appName={this.props.appName} />*/}
                 <Player />
         	</div>

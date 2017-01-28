@@ -32,7 +32,7 @@
 <body>
     <div id="root"></div>
     <script>
-    if ('serviceWorker' in navigator) {
+    if ('serviceWorker' in navigator && window.location.protocol === 'https:') {
         navigator.serviceWorker.register('/sw.js')
             .then(function(registration) {
                 console.log(registration);
@@ -44,6 +44,6 @@
         console.info('Service Worker is not supported in this browser.');
     }
     </script>
-<script type="text/javascript" src="/build/vendor.js"></script><script type="text/javascript" src="/build/app.10c051c8e081efdf9721.js"></script></body>
+<script type="text/javascript" src="/build/vendor.js"></script><script type="text/javascript" src="/build/app.js"></script></body>
 
 </html>

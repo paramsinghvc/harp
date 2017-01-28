@@ -27,7 +27,7 @@ export default class TrackItem extends Component {
         }
         this.props.setAudio(audioObj);
 
-        this.props.playAudio();
+        // this.props.playAudio();
     }
 
     @bindThis

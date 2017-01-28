@@ -9,6 +9,20 @@ import { setVolume, setAudio, playAudio, pauseAudio, togglePlayPause, setAudioDu
 
 require('./Player.scss');
 
+const styles = {
+    volumeSlider: {
+        height: 110,
+        position: 'absolute',
+        top: -106,
+        left: 5,
+        background: 'rgba(0, 0, 0, 0.42)',
+        padding: 10,
+        paddingTop: 15,
+        borderRadius: 3,
+        display: 'none'
+    }
+}
+
 @connect((state) => {
     return {
         player: state.player
@@ -28,10 +42,17 @@ export default class Player extends Component {
             this.endAudio();
         }.bind(this), false);
 
+        this.audioElem.addEventListener('abort', function() {
+            this.props.pauseAudio();
+            this.props.setCurrentPosition(0);
+            this.audioElem.currentTime = 0;
+        }.bind(this));
+
         this.audioElem.addEventListener('loadeddata', function() {
-            if (this.audioElem.readyState >= 2) {
-                this.audioElem.play();
-            }
+
+            this.audioElem.play();
+            this.props.playAudio();
+
         }.bind(this));
 
         this.audioElem.addEventListener('durationchange', function(e) {
@@ -131,7 +152,7 @@ export default class Player extends Component {
                 </div>
                 <div className="audio-controls" tabIndex="0" aria-label="Player Controls">
                     <audio id="audio-elem" ref="audioElem" src={this.props.player.getIn(['audioInfo', 'url'])} aria-hidden="true"/>
-                    <section className="seek-controls">
+                    <section className={this.props.player.getIn(['audioInfo', 'url']) ? 'seek-controls' : 'seek-controls disabled'}>
                         <i className="material-icons prev" onClick={this.playPrevious} tabIndex="0" aria-label="Play Previous Track">&#xE045;</i>
                         <i className={this.props.player.get('isPlaying') ? `material-icons pause-btn`: `material-icons play-btn`}
                         onClick={this.playPauseAudio} 
@@ -141,30 +162,34 @@ export default class Player extends Component {
                         }}
                         aria-label={this.props.player.get('isPlaying') ? `Pause Track`: `Play Track`} tabIndex="0"></i>
                         <i className="material-icons next" tabIndex="0" aria-label="Play Next Track" onClick={this.playNext}>&#xE044;</i>                        
-                    </section>
-                    <i className="material-icons clear-queue" title="Clear Queue" onClick={this.props.clearPlayerQueue}>&#xE0B8;</i>
+                    </section>                    
                     <Slider style={{width: '100%'}} sliderStyle={{marginTop: 5}}
                     max={this.props.player.get('audioDuration')} min={0} value={this.props.player.get('currentPosition')}
                     onChange={this.seekAudioToPosition}
                     aria-valuemax={this.props.player.get('audioDuration')} aria-valuemin={0} 
                     aria-valuenow={this.props.player.get('currentPosition')}
                     role="slider"
+                    disabled={!!!this.props.player.getIn(['audioInfo', 'url'])}
                     aria-label="Player Progress Slider"
                     aria-live="polite" aria-atomic="true" 
                     />
                 </div>
                 <div className="audio-volume">
-                    <i className={this.getVolumeClass(this.props.player.get('volume'))} onClick={() => {this.toggleMuteVolume(this.props.player.get('volume'))}}></i>
-                    <Slider style={{width: '100%'}} 
-                    sliderStyle={{marginTop: 0, marginBottom: 0}} 
-                    value={this.props.player.get('volume')} min={0} max={5}
-                    onChange={(e, volume) => {this.changeVolume(volume)}}
-                    aria-valuemax={5} aria-valuemin={0} 
-                    aria-valuenow={this.props.player.get('volume')}
-                    role="slider"
-                    tabIndex="0"
-                    aria-label="Player Volume Control"
-                    />
+                    <i className="material-icons clear-queue" title="Clear Queue" onClick={this.props.clearPlayerQueue}>&#xE0B8;</i>
+                    <div className="vol-slider-holder">
+                        <i className={this.getVolumeClass(this.props.player.get('volume'))} onClick={() => {this.toggleMuteVolume(this.props.player.get('volume'))}}></i>
+                        <Slider style={styles.volumeSlider} id="vol-slider"
+                        sliderStyle={{marginTop: 0, marginBottom: 0}}                         
+                        axis="y"
+                        value={this.props.player.get('volume')} min={0} max={5}
+                        onChange={(e, volume) => {this.changeVolume(volume)}}
+                        aria-valuemax={5} aria-valuemin={0} 
+                        aria-valuenow={this.props.player.get('volume')}
+                        role="slider"
+                        tabIndex="0"
+                        aria-label="Player Volume Control"
+                        />
+                    </div>
                 </div>
                 
             </section>

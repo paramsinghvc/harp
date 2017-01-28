@@ -1,3 +1,4 @@
+@import '../../styles/helpers/_breakpoints.scss';
 #s-player {
     width: 100%;
     height: 80px;
@@ -11,8 +12,9 @@
         padding: 20px;
     }
     .audio-info {
-        flex: 0 1 25%;
+        flex: 1 0 25%;
         overflow-x: hidden;
+        padding-right: 0 !important;
         .audio-name {
             font-size: 14px;
             overflow: hidden;
@@ -26,23 +28,20 @@
         }
     }
     .audio-controls {
-        flex: 1 0 55%;
+        flex: 1 0 60%;
         display: flex;
         flex-direction: column;
         align-items: center;
         padding-top: 10px !important;
         position: relative;
-        i.clear-queue {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            cursor: pointer;          
-        }
         .seek-controls {
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 20px 0 15px 0;
+            &.disabled {
+                color: #7d7d7d;
+            }
             i {
                 cursor: pointer;
                 &.next,
@@ -76,34 +75,59 @@
         }
     }
     .audio-volume {
-        flex: 1 0 20%;
+        flex: 1 0 15%;
+        padding-left: 0 !important;
         display: flex;
         align-items: center;
-        width: 100px;
-        .volume {
+        position: relative;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        @include breakpoint(phablet) {
+            flex-direction: column-reverse;
+            justify-content: center;
+        }
+        i.clear-queue {
+            margin-right: 3%;
             cursor: pointer;
-            margin-right: 20px;
-            &.down {
-                &:before {
-                    content: '\E04D';
+        }
+        .vol-slider-holder {
+            padding: 10px;
+            position: relative;
+            .volume {
+                cursor: pointer;
+                // margin-right: 20px;
+                // padding-top: 26px;
+                // position: relative;            
+                &.down {
+                    &:before {
+                        content: '\E04D';
+                    }
+                }
+                &.up {
+                    &:before {
+                        content: '\E050';
+                    }
+                }
+                &.mute {
+                    &:before {
+                        content: '\E04E';
+                    }
+                }
+                &.off {
+                    &:before {
+                        content: '\E04F';
+                    }
                 }
             }
-            &.up {
-                &:before {
-                    content: '\E050';
-                }
+            @include breakpoint(phablet) {
+                padding-bottom: 0;
+                padding-top: 0;
             }
-            &.mute {
-                &:before {
-                    content: '\E04E';
-                }
-            }
-            &.off {
-                &:before {
-                    content: '\E04F';
-                }
+            &:hover #vol-slider,
+            &:focus #vol-slider {
+                display: block !important;
             }
         }
     }
 }
-

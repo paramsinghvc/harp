@@ -7,7 +7,7 @@ const initState = fromJS({
     audioInfo: {
         name: '',
         artists: '',
-        url: ''
+        url: null
     },
     audioDuration: 3,
     currentPosition: 0,
