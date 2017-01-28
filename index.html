@@ -31,6 +31,19 @@
 
 <body>
     <div id="root"></div>
-<script type="text/javascript" src="/build/vendor.js"></script><script type="text/javascript" src="/build/app.68c0f2a77fcbbf26bd81.js"></script></body>
+    <script>
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('./sw.js')
+            .then(function(registration) {
+                console.log(registration);
+            })
+            .catch(function(e) {
+                console.error(e);
+            })
+    } else {
+        console.info('Service Worker is not supported in this browser.');
+    }
+    </script>
+<script type="text/javascript" src="/build/vendor.js"></script><script type="text/javascript" src="/build/app.10c051c8e081efdf9721.js"></script></body>
 
 </html>

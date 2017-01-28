@@ -1,6 +1,24 @@
 .home {
     font-size: 20px;
     font-weight: 300;
+    .skip-link{
+    	position: fixed;
+    	padding: 10px 20px;
+    	background: rgba(0,0,0,0.5);
+    	z-index: 2000;
+    	font-size: 12px;
+    	color: #fff;
+    	width: 1px;
+    	height: 1px;
+    	left: -100px;
+    	top: -100px;
+    	&:active, &:focus{
+    		left: 0;
+    		top: 0;
+    		width: auto;
+    		height: auto;
+    	}
+    }
     .bottom-spacer {
         height: 100px;
         

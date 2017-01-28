@@ -3,29 +3,64 @@ import AppBar from 'material-ui/AppBar';
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
 import IconButton from 'material-ui/IconButton';
+import IconMenu from 'material-ui/IconMenu';
 import NavigationClose from 'material-ui/svg-icons/navigation/close';
-import { Link } from 'react-router';
+import { Link, browserHistory } from 'react-router';
+import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
+
+import bindThis from '../../../shared/bindThis';
+import LoginService from '../../login/LoginService';
 
 class Header extends Component {
+
+    @bindThis
+    refreshPage() {
+        window.location.reload();
+    }
+
+    @bindThis
+    logoutApp() {
+    	LoginService.logout();
+    	browserHistory.push('/login');
+    }
+
     render() {
         return (
-        	<header>
+            <header>
         		<AppBar
 				    title={this.props.title}
-				    iconClassNameRight="muidocs-icon-navigation-expand-more"
 				     onLeftIconButtonTouchTap={this.props.toggleAppDrawer}
+				     iconElementRight={(<IconMenu
+						    iconButtonElement={
+						      <IconButton ><MoreVertIcon color="white"/></IconButton>
+						    }
+						    targetOrigin={{horizontal: 'right', vertical: 'top'}}
+						    anchorOrigin={{horizontal: 'right', vertical: 'top'}}
+						  >
+						    <MenuItem primaryText="Refresh" onClick={this.refreshPage} />
+						    <MenuItem primaryText="Sign out" onClick={this.logoutApp} />
+						  </IconMenu>)}
 				 />
-        		<Drawer open={this.props.appDrawerOpen} docked={false} onRequestChange={this.props.toggleAppDrawer}>
+        		<Drawer open={this.props.appDrawerOpen} docked={false} onRequestChange={this.props.toggleAppDrawer}
+        			// style={{display: (this.props.appDrawerOpen ? 'block': 'none')}}
+        			>
         			<AppBar
 				    	title={this.props.title}
 				    	iconElementLeft={<IconButton><NavigationClose /></IconButton>}
 				    	onLeftIconButtonTouchTap={this.props.toggleAppDrawer}
 				  	/>				  	
-				  	<Link to="/" onClick={this.props.toggleAppDrawer}><MenuItem>Top Categories</MenuItem></Link>
-				  	<Link to="/new-releases" onClick={this.props.toggleAppDrawer}><MenuItem>New Releases</MenuItem></Link>
-				  	<Link to="/featured-playlists" onClick={this.props.toggleAppDrawer}><MenuItem>Featured Playlists</MenuItem></Link>
-		          	<Link to="/about" onClick={this.props.toggleAppDrawer}><MenuItem>About</MenuItem></Link>
-		          	<Link to="/login" onClick={this.props.toggleAppDrawer}><MenuItem>Login</MenuItem></Link>
+				  	<Link to="/" aria-labelledby="top-categories" onClick={this.props.toggleAppDrawer}>
+				  		<MenuItem id="top-categories">Top Categories</MenuItem>
+				  	</Link>
+				  	<Link to="/new-releases" aria-labelledby="new-releases" onClick={this.props.toggleAppDrawer}>
+				  		<MenuItem id="new-releases">New Releases</MenuItem>
+				  	</Link>
+				  	<Link to="/featured-playlists" aria-labelledby="featured-playlists" onClick={this.props.toggleAppDrawer}>
+				  		<MenuItem id="featured-playlists">Featured Playlists</MenuItem>
+				  	</Link>
+		          	<Link to="/about" aria-labelledby="about" onClick={this.props.toggleAppDrawer}>
+		          		<MenuItem id="about">About</MenuItem>
+		          	</Link>
 		        </Drawer>		        	        	
 			 </header>
         )
@@ -33,9 +68,9 @@ class Header extends Component {
 }
 
 Header.propTypes = {
-	title: React.PropTypes.string,
-	appDrawerOpen: React.PropTypes.bool,
-	toggleAppDrawer: React.PropTypes.func
+    title: React.PropTypes.string,
+    appDrawerOpen: React.PropTypes.bool,
+    toggleAppDrawer: React.PropTypes.func
 }
 
 export default Header;

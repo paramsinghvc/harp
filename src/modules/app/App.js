@@ -10,6 +10,7 @@ import { setSnackbar } from '../app/AppActions';
 const muiTheme = getMuiTheme({
     palette: {
         primary1Color: '#00d95f',
+        accent1Color: '#fff',
         textColor: '#000',
     }
 });

@@ -42,7 +42,7 @@ class Login extends Component {
         return (
             <section className="login-holder">
 	    		<img className="logo" src="/assets/images/spotify-128.png" />
-	    		<button className="login-button" onClick={LoginService.launchPopup}>Login to Spotify</button>
+	    		<button className="login-button ripple" onClick={LoginService.launchPopup}>Login to Spotify</button>
     		</section>
         )
     }

@@ -9,6 +9,7 @@ require('./CategoryPlaylists.scss');
 
 @connect((state) => {
     return {
+        isLoading: state.app.get('isLoading'),
         category: state.categories.getIn(['selectedCategory']),
         playlists: state.categories.getIn(['playlists', 'items'])
     }
@@ -22,17 +23,21 @@ export default class CategoryPlaylists extends Component {
 
     render() {
         return (
-            <div className="cat-playlists">
-            	<div className="hero-section">
-            		<img src={this.props.category.get('icons').first().get('url')} />
-        			<div className="info-section">
-        				<p>{this.props.category.get('name')}</p>
-        			</div>
-            	</div>
-	            <div className="playlists">
-	            	{this.props.playlists.map((playlist, i) => <PlaylistItem playlist={playlist} key={i} />)}
-	            </div>
-        	</div>
+            <main className="cat-playlists" aria-labelledby="cat-name" tabIndex="0">
+            {!this.props.isLoading && 
+            	(<div>
+                    <section className="hero-section">
+            		<img src={this.props.category.get('icons').first().get('url')} alt={this.props.category.get('name')} tabIndex="0" />
+        			<section className="info-section">
+        				<p id="cat-name" role="heading" tabIndex="0">{this.props.category.get('name')}</p>
+        			</section>
+                	</section>
+    	            <div className="playlists" role="list" >
+    	            	{this.props.playlists.map((playlist, i) => <PlaylistItem playlist={playlist} idx={i} key={i} setSize={this.props.playlists.size}/>)}
+    	            </div>
+                </div>
+                )}
+        	</main>
         )
     }
 

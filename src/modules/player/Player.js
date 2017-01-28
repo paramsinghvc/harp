@@ -125,22 +125,32 @@ export default class Player extends Component {
         this.playPauseStateCheck(this.props.player.get('isPlaying'));
         return (
             <section id="s-player">                             
-                <div className="audio-info">
-                    <p className="audio-name">{this.props.player.getIn(['audioInfo', 'name'])}</p>
-                    <p className="audio-artists">{this.props.player.getIn(['audioInfo', 'artists'])}</p>
+                <div className="audio-info" tabIndex="0" aria-label="playing audio information">
+                    <p className="audio-name" tabIndex="0" aria-label="Audio Name" id="audio-name" aria-describedby="audio-name">{this.props.player.getIn(['audioInfo', 'name'])}</p>
+                    <p className="audio-artists" tabIndex="0" aria-label="Artists Names" aria-describedby="audio-artists" id="audio-artists">{this.props.player.getIn(['audioInfo', 'artists'])}</p>
                 </div>
-                <div className="audio-controls">
-                    <audio id="audio-elem" ref="audioElem" src={this.props.player.getIn(['audioInfo', 'url'])} />                    
+                <div className="audio-controls" tabIndex="0" aria-label="Player Controls">
+                    <audio id="audio-elem" ref="audioElem" src={this.props.player.getIn(['audioInfo', 'url'])} aria-hidden="true"/>
                     <section className="seek-controls">
-                        <i className="material-icons prev" onClick={this.playPrevious}>&#xE045;</i>
+                        <i className="material-icons prev" onClick={this.playPrevious} tabIndex="0" aria-label="Play Previous Track">&#xE045;</i>
                         <i className={this.props.player.get('isPlaying') ? `material-icons pause-btn`: `material-icons play-btn`}
-                        onClick={this.playPauseAudio}></i>
-                        <i className="material-icons next"  onClick={this.playNext}>&#xE044;</i>                        
+                        onClick={this.playPauseAudio} 
+                        onKeyPress={(e) => {                    
+                            if(e.which == 13)
+                                this.playPauseAudio();
+                        }}
+                        aria-label={this.props.player.get('isPlaying') ? `Pause Track`: `Play Track`} tabIndex="0"></i>
+                        <i className="material-icons next" tabIndex="0" aria-label="Play Next Track" onClick={this.playNext}>&#xE044;</i>                        
                     </section>
                     <i className="material-icons clear-queue" title="Clear Queue" onClick={this.props.clearPlayerQueue}>&#xE0B8;</i>
                     <Slider style={{width: '100%'}} sliderStyle={{marginTop: 5}}
                     max={this.props.player.get('audioDuration')} min={0} value={this.props.player.get('currentPosition')}
                     onChange={this.seekAudioToPosition}
+                    aria-valuemax={this.props.player.get('audioDuration')} aria-valuemin={0} 
+                    aria-valuenow={this.props.player.get('currentPosition')}
+                    role="slider"
+                    aria-label="Player Progress Slider"
+                    aria-live="polite" aria-atomic="true" 
                     />
                 </div>
                 <div className="audio-volume">
@@ -149,6 +159,11 @@ export default class Player extends Component {
                     sliderStyle={{marginTop: 0, marginBottom: 0}} 
                     value={this.props.player.get('volume')} min={0} max={5}
                     onChange={(e, volume) => {this.changeVolume(volume)}}
+                    aria-valuemax={5} aria-valuemin={0} 
+                    aria-valuenow={this.props.player.get('volume')}
+                    role="slider"
+                    tabIndex="0"
+                    aria-label="Player Volume Control"
                     />
                 </div>
                 

@@ -13,6 +13,7 @@ require('./Album.scss');
 
 @connect((state) => {
     return {
+        isLoading: state.app.get('isLoading'),
         album: state.album.get('data')
     }
 }, (dispatch) => {
@@ -42,16 +43,21 @@ class Album extends Component {
     render() {
         return (
             <main className="album">
-                <section className="hero-section">
-                    <img src={this.props.album.get('images').first().get('url')} />
-                    <div className="info-section">
-                        <p>{this.props.album.get('name')}</p>
-                        <RaisedButton label="Play" primary={true} style={{marginTop: 20}} onClick={this.queueTracks}/>
-                    </div>
-                </section>
-                <section className="album-tracks">
-                    <TracksList tracks={this.props.album.getIn(['tracks', 'items'])}/>
-                </section>
+            {!this.props.isLoading &&
+                (
+                <div>
+                    <section className="hero-section" tabIndex="0" aria-labelledby="album-info-section"> 
+                        <img src={this.props.album.get('images').first().get('url')} alt={this.props.album.get('name')} />
+                        <div className="info-section" id="album-info-section">
+                            <p>{this.props.album.get('name')}</p>
+                            <RaisedButton label="Play" primary={true} style={{marginTop: 20}} onClick={this.queueTracks} aria-label="Play Button"/>
+                        </div>
+                    </section>
+                    <section className="album-tracks" tabIndex="0" aria-label="Tracks List">
+                        <TracksList tracks={this.props.album.getIn(['tracks', 'items'])}/>
+                    </section>
+                </div>
+            )}
             </main>
         )
     }

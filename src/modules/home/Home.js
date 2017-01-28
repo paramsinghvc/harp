@@ -29,8 +29,9 @@ class Home extends Component {
     render() {
         return (
         	<div className="home">
+                <a className="skip-link" href="#main-content" tabIndex="0">Skip to main content</a>
         	 	<Header title={this.props.appName} toggleAppDrawer={this.props.toggleAppDrawer} appDrawerOpen={this.props.appDrawerOpen} />        		        
-                {this.props.children}
+                <div id="main-content">{this.props.children}</div>
                 {(this.props.isLoading === true) && <CircularProgress size={60} thickness={3} style={{position: 'fixed', top: '50%', left: '50%', marginLeft: '-30px', marginTop: '-30px'}} />}
                 <div className="bottom-spacer" />
                 {/*<Footer appName={this.props.appName} />*/}

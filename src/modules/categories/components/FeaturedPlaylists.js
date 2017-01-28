@@ -9,6 +9,7 @@ require('./FeaturedPlaylists.scss');
 
 @connect((state) => {
     return {
+        isLoading: state.app.get('isLoading'),
         playlists: state.categories.getIn(['featuredPlaylists', 'items'])
     }
 }, (dispatch) => {
@@ -21,12 +22,12 @@ export default class FeaturedPlaylists extends Component {
 
     render() {
         return (
-            <div className="featured-playlists">
-                <h2> Featured Playlists</h2>
-	            <div className="playlists">
-	            	{this.props.playlists.map((playlist, i) => <PlaylistItem playlist={playlist} key={i} />)}
-	            </div>
-        	</div>
+            <section className="featured-playlists"  aria-labelledby="f-name" tabIndex="0">
+                <h2 id="f-name"> Featured Playlists</h2>
+	            {!this.props.isLoading && (<section className="playlists" tabIndex="0" aria-label="Playlists">
+	            	{this.props.playlists.map((playlist, i) => <PlaylistItem playlist={playlist} key={i} idx={i} setSize={this.props.playlists.size}/>)}
+	            </section>)}
+        	</section>
         )
     }
 

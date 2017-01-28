@@ -1,4 +1,5 @@
 @import '../../styles/base/_variables.scss';
+@import '../../styles/helpers/_breakpoints.scss';
 .login-holder {
     height: 100%;
     width: 100%;
@@ -17,7 +18,7 @@
     .login-button {
         background-color: $primary-color;
         padding: 18px 20px;
-        width: 80%;
+        width: 30%;
         border-radius: 31px;
         border: none;
         font-size: 20px;
@@ -25,5 +26,25 @@
         margin-left: auto;
         margin-right: auto;
         cursor: pointer;
+        outline: none;
+        &:hover {
+            background: #00d45d;
+        }
+        &:active {
+            background: #01a047;
+            box-shadow: 0 0 12px #000;
+        }
+        @include breakpoint(phablet) {
+            width: 90%;
+        }
+        @include breakpoint(tablet) {
+            width: 50%;
+        }
+        @include breakpoint(mobileonly) {
+            width: 80%;
+        }
+        @include breakpoint(desktop) {
+            width: 30%;
+        }
     }
 }

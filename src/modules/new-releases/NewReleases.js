@@ -8,7 +8,8 @@ require('./NewReleases.scss');
 
 @connect((state) => {
     return {
-        newReleasesAlbums: state.newReleases.get('data')
+        isLoading: state.app.get('isLoading'),
+        newReleasesAlbums: state.newReleases.getIn(['data', 'items'])
     }
 }, (dispatch) => {
     return bindActionCreators({ getNewReleasesData }, dispatch)
@@ -22,11 +23,11 @@ class NewReleases extends Component {
     }
     render() {
         return (
-            <section className="new-releases-holder">
-                <h2> New Releases</h2>
-                <main className="albums">
-                    {this.props.newReleasesAlbums.get('items').map((album , i) => <AlbumItem album={album} key={i} />)}
-                </main>
+            <section className="new-releases-holder" aria-labelledby="new-releases-holder" tabIndex="0">
+                <h2 id="new-releases-holder"> New Releases</h2>
+                {!this.props.isLoading && (<main className="albums">
+                    {this.props.newReleasesAlbums.map((album , i) => <AlbumItem album={album} key={i} idx={i} setSize={this.props.newReleasesAlbums.size} />)}
+                </main>)}
     		</section>
         )
     }
