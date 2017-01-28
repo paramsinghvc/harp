@@ -1,7 +1,7 @@
 importScripts('/assets/js/cache-polyfill.js');
 
 var APP_NAME = 'Harp';
-var APP_VERSION = '3';
+var APP_VERSION = '4';
 var CACHE_NAME = APP_NAME + '-v' + APP_VERSION;
 var CACHE_FILES = [
     '/',
