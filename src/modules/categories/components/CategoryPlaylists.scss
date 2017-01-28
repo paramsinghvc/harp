@@ -1,3 +1,4 @@
+@import '../../../styles/helpers/_breakpoints.scss';
 .cat-playlists {
     color: #fff;
     .hero-section {
@@ -13,21 +14,37 @@
         padding: 20px;
         img {
             margin-right: 30px;
+            @include breakpoint(tablet) {
+                margin-right: 0;
+            }
         }
         .info-section {
             color: #fff;
             align-self: flex-end;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
             p {
-                text-shadow: 0 0 22px rgba(0,0,0,0.8);
+                text-shadow: 0 0 22px rgba(0, 0, 0, 0.8);
                 font-size: 50px;
                 font-weight: 300;
+                @include breakpoint(tablet) {
+                    margin-top: 30px;
+                }
             }
+            @include breakpoint(tablet) {
+                align-items: center;
+            }
+        }
+        @include breakpoint(tablet) {
+            align-items: center;
+            justify-content: center;
         }
     }
     .playlists {
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
-        padding-top: 20px;     
+        padding-top: 20px;
     }
 }
