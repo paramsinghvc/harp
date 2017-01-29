@@ -17,7 +17,7 @@
             align-items: center;
             justify-content: center;
         }
-        img {
+        img.me-img {
             width: 200px;
             height: 200px;
             margin-right: 20px;
@@ -26,6 +26,23 @@
             font-size: 14px;
             margin-top: 20px;
             line-height: 1.4;
+        }
+        .social-tray {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            margin-top: 26px;
+            & > a {
+                margin-right: 15px;
+                img {
+                    width: 30px;
+                    height: 30px;
+                    transition: transform 0.2s;
+                    &:hover{
+                        transform: scale(1.1, 1.1);
+                    }
+                }
+            }
         }
     }
 }
