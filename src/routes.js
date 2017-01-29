@@ -23,6 +23,7 @@ if (process.env.NODE_ENV == 'development') {
     require('./modules/playlist/Playlist');
     require('./modules/album/Album');
     require('./modules/new-releases/NewReleases');
+    require('./modules/artist/Artist');
 }
 
 const routes = 
@@ -57,6 +58,11 @@ const routes =
                 <Route path="album/:albumId" getComponent={(nextState, cb) => {
                     require.ensure([], require => {
                       cb(null, require('./modules/album/Album').default);
+                    });
+                }} />
+                <Route path="artist/:artistId" getComponent={(nextState, cb) => {
+                    require.ensure([], require => {
+                      cb(null, require('./modules/artist/Artist').default);
                     });
                 }} />
                 <Route path="new-releases" getComponent={(nextState, cb) => {

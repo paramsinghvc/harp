@@ -43,7 +43,7 @@ class Header extends Component {
 						    <MenuItem primaryText="Sign out" onClick={this.logoutApp} />
 						  </IconMenu>)}
 				     >
-				     {/*<SearchBox />*/}				     
+				     <SearchBox performSearch={this.props.performSearch}/>				     
 				     </AppBar>
         			<Drawer open={this.props.appDrawerOpen} docked={false} onRequestChange={this.props.toggleAppDrawer}
         			// style={{display: (this.props.appDrawerOpen ? 'block': 'none')}}

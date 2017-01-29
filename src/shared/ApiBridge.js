@@ -1,4 +1,4 @@
-// import fetch from 'isomorphic-fetch';
+import fetch from 'isomorphic-fetch';
 import config from './config';
 
 export default class ApiBridge {

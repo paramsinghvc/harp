@@ -7,6 +7,8 @@ import PlaylistReducer from './modules/playlist/PlaylistReducer';
 import PlayerReducer from './modules/player/PlayerReducer';
 import AlbumReducer from './modules/album/AlbumReducer';
 import NewReleasesReducer from './modules/new-releases/NewReleasesReducer';
+import SearchReducer from './modules/search/SearchReducer';
+import ArtistReducer from './modules/artist/ArtistReducer';
 
 // Combine all reducers into one root reducer
 export default combineReducers({
@@ -15,5 +17,7 @@ export default combineReducers({
 	playlist: PlaylistReducer,
 	player: PlayerReducer,
 	album: AlbumReducer,
-	newReleases: NewReleasesReducer
+	newReleases: NewReleasesReducer,
+	search: SearchReducer,
+	artist: ArtistReducer
 });

@@ -2,10 +2,86 @@
     position: fixed;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.7);
+    background: rgba(0, 0, 0, 0.92);
     color: #fff;
     left: 0;
     top: 64px;
     z-index: 2000;
     padding: 3% 4%;
+    padding-bottom: 170px;
+    overflow-y: scroll;
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        h2 {
+            font-weight: 300;
+        }
+        i.material-icons {
+            font-size: 40px;
+            cursor: pointer;
+            transition: transform 0.2s;
+            &:hover {
+                transform: scale(1.2, 1.2) rotate(90deg);
+            }
+        }
+    }
+    .search-results-holder {
+        section[class$='-results'] {
+            margin-top: 30px;
+            h3 {
+                font-weight: 300;
+                margin-bottom: 10px;
+            }
+            .r-holder {
+                display: flex;
+                flex-wrap: wrap;
+                .container {
+                    padding: 10px;
+                    padding-left: 0;
+                    display: block;
+                    overflow: hidden;
+                    width: 160px;
+                    min-width: 160px;
+                    max-width: 160px;
+                    margin-right: 20px;
+                    p.title {
+                        white-space: nowrap;
+                        text-overflow: ellipsis;
+                        overflow-x: hidden;
+                        font-size: 14px;
+                        margin-top: 10px;
+                    }
+                    .img-holder {
+                        width: 150px;
+                        height: 150px;
+                        text-align: center;
+                        position: relative;
+                        overflow: hidden;                        
+                        .bgImage {
+                            background-size: cover;
+                            filter: blur(7px) grayscale(20%);
+                            background-position: center;
+                            background-repeat: no-repeat;
+                            overflow: hidden;
+                            position: absolute;
+                            width: 100%;
+                            height: 100%;
+                        }
+                        img {
+                            position: absolute;
+                            max-height: 150px;
+                            max-width: 150px;
+                            // width: 100%;
+                            // left: 0;
+                            object-fit: contain;
+                            left: 50%;
+                            top: 50%;
+                            transform: translateX(-50%) translateY(-50%);
+                        }
+                    }
+                }
+            }
+        }
+    }
 }

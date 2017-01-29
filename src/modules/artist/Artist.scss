@@ -1,0 +1,81 @@
+@import '../../styles/helpers/_breakpoints.scss';
+.artist {
+    color: #fff;
+    .hero-section {
+        width: 100%;
+        position: relative;
+        overflow: hidden;
+        .hero-bg-image {
+            background: #2d2d2d no-repeat center center;
+            background-size: cover;
+            background-attachment: fixed;
+            position: absolute;
+            filter: blur(10px) grayscale(100%);
+            transform: scale(1.1, 1.1);
+            width: 100%;
+            height: 100%;
+        }
+        .hero-content {
+            padding: 20px;
+            min-height: 315px;
+            justify-content: flex-start;
+            display: flex;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 2;
+            img {
+                margin-right: 30px;
+                max-height: 300px;
+                max-width: 300px;
+                @include breakpoint(mobileonly) {
+                    margin-right: 0;
+                }
+            }
+            .info-section {
+                color: #fff;
+                align-self: flex-start;
+                text-shadow: 0 0 22px rgba(0, 0, 0, 0.8);
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                p {
+                    &:first-of-type {
+                        font-size: 50px;
+                        font-weight: 300;
+                        @include breakpoint(mobileonly) {
+                            margin-top: 30px;
+                        }
+                    }
+                    font-size: 14px;
+                    &:last-of-type {
+                        margin-top: 15px;
+                    }
+                }
+                .chips-holder {
+                    display: flex;
+                    flex-wrap: wrap;
+                    margin-top: 15px;
+                    .chip {
+                        margin-right: 10px;
+                        margin-bottom: 10px;
+                        border: 1px solid;
+                        border-radius: 25px;
+                        padding: 5px 12px;
+                        font-size: 12px;
+                    }
+                }
+                @include breakpoint(mobileonly) {
+                    align-items: center;
+                    align-self: center;
+                    justify-content: center;
+                }
+            }
+            @include breakpoint(mobileonly) {
+                align-items: center;
+                justify-content: center;
+                flex-direction: column;
+            }
+        }
+    }
+}

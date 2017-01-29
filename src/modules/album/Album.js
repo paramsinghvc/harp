@@ -27,6 +27,14 @@ class Album extends Component {
         const { albumId } = this.props.params;
         this.props.getAlbumData(albumId);
     }
+    
+    componentWillReceiveProps(nextProps) {
+        if (this.props.params.albumId != nextProps.params.albumId) {
+            const { albumId } = nextProps.params;
+            console.log(nextProps.params);
+            this.props.getAlbumData(albumId);
+        }
+    }
 
     @bindThis
     queueTracks() {

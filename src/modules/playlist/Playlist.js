@@ -27,6 +27,15 @@ class Categories extends Component {
         const { userId, playlistId } = this.props.params;
         this.props.getPlaylistData(userId, playlistId);
     }
+
+    componentWillReceiveProps(nextProps) {
+        if (this.props.params.playlistId != nextProps.params.playlistId) {
+            const { userId, playlistId } = nextProps.params;
+            console.log(nextProps.params);
+            this.props.getPlaylistData(userId, playlistId);
+        }
+    }
+
     @bindThis
     queueTracks() {
         let queue = this.props.playlist.getIn(['tracks', 'items']).map(track => {

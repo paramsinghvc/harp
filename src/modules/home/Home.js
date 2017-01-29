@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import CircularProgress from 'material-ui/CircularProgress';
 
 import { setLoading, toggleAppDrawer } from '../app/AppActions';
+import { performSearch } from '../search/SearchActions';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Player from '../player/Player';
@@ -14,14 +15,16 @@ const mapStateToProps = (state) => {
   return {
     isLoading: state.app.get('isLoading'),
     appName: state.app.get('appName'),
-    appDrawerOpen: state.app.get('appDrawerOpen')
+    appDrawerOpen: state.app.get('appDrawerOpen'),
+    searchOpen: state.search.get('searchOpen')
   };
 }
 
 const mapDispatchToProps = (dispatch) => {
     return bindActionCreators({
         setLoading,
-        toggleAppDrawer
+        toggleAppDrawer,
+        performSearch
     }, dispatch);
 }
 
@@ -31,10 +34,11 @@ class Home extends Component {
         return (
         	<div className="home">
                 <a className="skip-link" href="#main-content" tabIndex="0">Skip to main content</a>
-        	 	<Header title={this.props.appName} toggleAppDrawer={this.props.toggleAppDrawer} appDrawerOpen={this.props.appDrawerOpen} />        		        
+        	 	<Header title={this.props.appName} toggleAppDrawer={this.props.toggleAppDrawer} appDrawerOpen={this.props.appDrawerOpen}
+                performSearch={this.props.performSearch} />        		        
                 <div id="main-content">{this.props.children}</div>
                 {(this.props.isLoading === true) && <CircularProgress size={60} thickness={3} style={{position: 'fixed', top: '50%', left: '50%', marginLeft: '-30px', marginTop: '-30px'}} />}
-                {/*<Search />*/}
+                {this.props.searchOpen && <Search />}
                 <div className="bottom-spacer" />                
                 {/*<Footer appName={this.props.appName} />*/}
                 <Player />
