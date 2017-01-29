@@ -6,7 +6,7 @@ import Chip from 'material-ui/Chip';
 import { Map } from 'immutable';
 
 import bindThis from '../../shared/bindThis';
-import { getArtistData } from './ArtistActions';
+import { getArtistData, followArtist } from './ArtistActions';
 import { setAndLaunchPlayerQueue } from '../player/PlayerActions';
 import TracksList from '../../components/tracks-list/TracksList';
 
@@ -15,10 +15,11 @@ require('./Artist.scss');
 @connect((state) => {
     return {
         isLoading: state.app.get('isLoading'),
-        artist: state.artist.get('data')
+        artist: state.artist.get('data'),
+        artistTracks: state.artist.get('tracks')
     }
 }, (dispatch) => {
-    return bindActionCreators({ getArtistData, setAndLaunchPlayerQueue }, dispatch)
+    return bindActionCreators({ getArtistData, setAndLaunchPlayerQueue, followArtist }, dispatch)
 })
 class Artist extends Component {
     constructor(props) {
@@ -39,7 +40,7 @@ class Artist extends Component {
 
     @bindThis
     queueTracks() {
-        let queue = this.props.artist.getIn(['tracks', 'items']).map(track => {
+        let queue = this.props.artistTracks.map(track => {
             return Map({
                 name: track.get('name'),
                 artists: (track.get('artists')).map(artist => artist.get('name')).join(', '),
@@ -66,12 +67,15 @@ class Artist extends Component {
                                     {this.props.artist.get('genres').map((genre, i) => <div className="chip" key={i}>{genre}</div>)}
                                 </section>
                                 <p>{this.props.artist.getIn(['followers', 'total'])} Followers</p>
-                                {/*<RaisedButton label="Play" primary={true} style={{marginTop: 20}} onClick={this.queueTracks} aria-label="Play Button"/>*/}
+                                <section className="buttons">
+                                    <RaisedButton label="Play" primary={true} style={{marginTop: 20, marginRight: 20}} onClick={this.queueTracks} aria-label="Play Button"/>
+                                    <RaisedButton label="Follow" primary={true} style={{marginTop: 20}} onClick={() => {this.props.followArtist(this.props.artist.get('id'))}} aria-label="Play Button"/>
+                                </section>
                             </div>
                         </div>
                     </section>
                     <section className="artist-tracks" tabIndex="0" aria-label="Tracks List">
-                        {/*<TracksList tracks={this.props.artist.getIn(['tracks', 'items'])}/>*/}
+                        {<TracksList tracks={this.props.artistTracks}/>}
                     </section>
                 </div>
             )}

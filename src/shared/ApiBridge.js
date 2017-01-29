@@ -13,7 +13,7 @@ export default class ApiBridge {
             if (!res.ok) {
                 throw res;
             }
-            return res.json()
+            return (res.status == 204) ? res : res.json();
         })
     }
 

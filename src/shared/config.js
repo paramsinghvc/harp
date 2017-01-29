@@ -5,7 +5,7 @@ const devConfig = {
     SPOTIFY_BASE_API: 'https://api.spotify.com',
     SPOTIFY_AUTH_API: 'https://accounts.spotify.com',
     SPOTIFY_REDIRECT_URI: `${window.location.origin}/callback_spotify`,
-    SPOTIFY_AUTH_SCOPES: 'user-top-read'
+    SPOTIFY_AUTH_SCOPES: 'user-top-read user-follow-modify user-library-read user-follow-read'
 }
 
 const prodConfig = {
@@ -15,7 +15,7 @@ const prodConfig = {
     SPOTIFY_BASE_API: 'https://api.spotify.com',
     SPOTIFY_AUTH_API: 'https://accounts.spotify.com',
     SPOTIFY_REDIRECT_URI: `${window.location.origin}/callback_spotify`,
-    SPOTIFY_AUTH_SCOPES: 'user-top-read'
+    SPOTIFY_AUTH_SCOPES: 'user-top-read user-follow-modify user-library-read user-follow-read'
 }
 
 const config = (process.env.NODE_ENV == 'development') ? devConfig : prodConfig;

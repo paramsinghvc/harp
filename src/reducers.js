@@ -9,6 +9,7 @@ import AlbumReducer from './modules/album/AlbumReducer';
 import NewReleasesReducer from './modules/new-releases/NewReleasesReducer';
 import SearchReducer from './modules/search/SearchReducer';
 import ArtistReducer from './modules/artist/ArtistReducer';
+import UserReducer from './modules/user/UserReducer';
 
 // Combine all reducers into one root reducer
 export default combineReducers({
@@ -19,5 +20,6 @@ export default combineReducers({
 	album: AlbumReducer,
 	newReleases: NewReleasesReducer,
 	search: SearchReducer,
-	artist: ArtistReducer
+	artist: ArtistReducer,
+	user: UserReducer
 });

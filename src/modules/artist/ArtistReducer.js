@@ -13,9 +13,11 @@ const initialState = fromJS({
 const ArtistReducer = (state = initialState, action) => {
     switch (action.type) {
         case ArtistConstants.SET_ARTIST_DATA:
-            {
-                return state.setIn(['data'], fromJS(action.payload))
-            }
+            return state.setIn(['data'], fromJS(action.payload))
+        case ArtistConstants.SET_ARTIST_TRACKS:
+            return state.merge(fromJS({
+                tracks: action.payload
+            }))
         default:
             return state;
     }

@@ -19,7 +19,9 @@ export default class SearchBox extends Component {
 
     render() {
         return (
-            <input type="search" id="search-box" placeholder="Search" ref="sb"/>
+            <input type="search" id="search-box" placeholder="Search" ref="sb" onFocus={() => {
+                this.refs.sb.select();
+            }} />
         )
     }
 }

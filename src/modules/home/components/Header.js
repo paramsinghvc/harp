@@ -62,6 +62,9 @@ class Header extends Component {
 				  	<Link to="/featured-playlists" aria-labelledby="featured-playlists" onClick={this.props.toggleAppDrawer}>
 				  		<MenuItem id="featured-playlists">Featured Playlists</MenuItem>
 				  	</Link>
+				  	<Link to="/me" aria-labelledby="my-section" onClick={this.props.toggleAppDrawer}>
+				  		<MenuItem id="my-section">My Favorites</MenuItem>
+				  	</Link>
 		          	<Link to="/about" aria-labelledby="about" onClick={this.props.toggleAppDrawer}>
 		          		<MenuItem id="about">About</MenuItem>
 		          	</Link>

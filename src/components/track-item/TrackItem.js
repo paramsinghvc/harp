@@ -40,6 +40,11 @@ export default class TrackItem extends Component {
         browserHistory.push(`/album/${albumId}`);
     }
 
+    @bindThis
+    openArtistPage(artistId) {
+        browserHistory.push(`/artist/${albumId}`);
+    }
+
     render() {
         return (
             <section className="track-item" aria-posinset={this.props.idx + 1} tabIndex="0"

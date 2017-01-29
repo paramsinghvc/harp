@@ -28,6 +28,7 @@
                 text-shadow: 0 0 22px rgba(0, 0, 0, 0.8);
                 font-size: 50px;
                 font-weight: 300;
+                text-align: center;
                 @include breakpoint(tablet) {
                     margin-top: 30px;
                 }
